@@ -13,6 +13,7 @@ medications more efficiently in the modern world.
 Step 1: Run the .bat file to install all the required libaries.
 
 Step 2: Run DataBase.py to intizialize your database [You have to do this only once]
+
 Step 3: Run DoseDirect.py to use program.
 
 # Programmers Note
