@@ -3,7 +3,6 @@ import pyfiglet
 import random
 import numpy as np
 from rich.table import Table
-from drug_named_entity_recognition import find_drugs
 from rich.console import Console
 from rich.markdown import Markdown
 from rich.panel import Panel
@@ -208,19 +207,7 @@ def MedicalReport_grabber(date,medical_reportID):
       list_DBMedReportID.append(y)
    newlist = list(np.concatenate(list_DBMedReportID))
    return newlist
-# def Medicalinfo_Option():
-#    while True:
-#             try:
-#                Medicalinfo_Option=int(console.input("[bold red]Enter Value: "))
-#                break
-#             except ValueError:
-#                console.print(Panel("[bold red]Error!"),justify='center')
-#    return Medicalinfo_Option
 #-----Functions----#
-
-# print(Medicine_Grabber("11-8-2023",2))
-
-
 
 Login_Print = "# Input 1 for Login"
 Signin_Print = "# Input 2 for Sign In"
@@ -312,7 +299,8 @@ while True:
                continue
          Email=console.input("[bold red]Enter Email: ")
          ChronicDisease=console.input("[bold red]Enter Chronic Disease: ")
-         query = "INSERT INTO medicalinfo (MedicalID, age, MobileNo, Email, ChronicDisease, EmiratesID, InsuranceID) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+         query = """INSERT INTO medicalinfo (MedicalID, age, MobileNo, Email, ChronicDisease, EmiratesID, InsuranceID) 
+         VALUES (%s, %s, %s, %s, %s, %s, %s)"""
          cursor.execute(query, (MedicalID, Age, MobileNu, Email, ChronicDisease, EmiratesID, InsuranceID))
          database.commit()
          MedicalInfoAdd = "# MedicalInfo Added!"
@@ -330,7 +318,6 @@ while True:
       MedicalID=convert(MedicalID_Grabber(username))
       if medicainfo_Verfier(MedicalID):
          List_Info=Medicalinfo_grabber(MedicalID)
-
          table = Table(title="Medical Info")
          table.add_column("Category", style="blue")
          table.add_column("Output", justify="right", style="green")
@@ -340,7 +327,6 @@ while True:
          table.add_row("ChronicDisease", List_Info[3])
          table.add_row("EmiratesID", List_Info[4])
          table.add_row("InsuranceID", List_Info[5])
-         console = Console()
          console.print(table,justify="center")
          main_menu()
          while True:
@@ -359,7 +345,7 @@ while True:
             except ValueError:
                console.print(Panel("[bold red]Error!"),justify='center')
    #EDIT medicalinfo
-   while Option==3: #GUI HOLD USER COMFORT HOLD FIX IT!!!
+   while Option==3: 
       MedicalID=convert(MedicalID_Grabber(username))
       if medicainfo_Verfier(MedicalID):
          main_menu_medicalinfo()
@@ -484,7 +470,7 @@ while True:
                   break
                except ValueError:
                   console.print(Panel("[bold red]Error!"),justify='center')
-         while Medicalinfo_Option==7: # I AM HERE
+         while Medicalinfo_Option==7: # Prasanth Was here
             main_menu()
             while True:
                try:
@@ -528,8 +514,6 @@ while True:
                except ValueError:
                   console.print(Panel("[bold red]Error!"),justify='center')
          else:
-            username=str(username)
-            Medical_Report=convert(MedicalReportID_Grabber(username))
             while True:
                try:
                   MedicineNu=int(console.input("[bold red]How many medicines prescribed: "))
@@ -581,7 +565,8 @@ while True:
                Instructions.append("|")
             Instructions=convert_string(Instructions)
             Med=convert_string(Med)
-            query = "INSERT INTO medical_Reports (Date, Medical_Report, Medicines, Dosage, Duration, Instructions) VALUES (%s, %s, %s, %s, %s, %s)"
+            query = """INSERT INTO medical_Reports (Date, Medical_Report, Medicines, Dosage, Duration, Instructions) 
+            VALUES (%s, %s, %s, %s, %s, %s)"""
             cursor.execute(query, (date, Medical_Report, Med, Dosage, Duration, Instructions))
             database.commit()
             console.print(Panel("[bold green]Prescription Added!"),justify='center')
@@ -644,7 +629,7 @@ while True:
          username=str(username)
          Medical_Report=convert(MedicalReportID_Grabber(username))
          while True:
-            console.print(Panel("[bold green]Enter Apporiate Date!"),justify='center')
+            console.print(Panel("[bold green]Enter Incorrect Date!"),justify='center')
             while True:
                      try:
                         Year=int(console.input("[bold red]Enter Year: "))
@@ -909,59 +894,6 @@ while True:
             break
          except ValueError:
             console.print(Panel("[bold red]Error!"),justify='center')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      # Medical_Report=convert(MedicalReportID_Grabber(username))
-      # while True:
-      #    print("Enter Apporiate Date")
-      #    while True:
-      #             try:
-      #                Year=int(input("Enter Year: "))
-      #                Month=int(input("Enter Month: "))
-      #                Day=int(input("Enter Day: "))
-      #                break
-      #             except ValueError:
-      #                print("Error!")
-      #                continue
-      #    date=f"{Day}-{Month}-{Year}"
-      #    if Date_Verifier(date,Medical_Report):
-      #       break
-      #    else:
-      #       continue
-      # for y in Medicine_Grabber(date,Medical_Report):
-      #    x=find_drugs(y.split(" "))
-      #    nhs_urls = [item[0]['nhs_url'] for item in x if 'nhs_url' in item[0]]
-      #    wikipedia_urls = [item[0]['wikipedia_url'] for item in x if 'wikipedia_url' in item[0]]
-      #    drugbankid = [item[0]['drugbank_id'] for item in x if 'drugbank_id' in item[0]]
-      #    if nhs_urls!=[]:
-      #       print(f"Wikipedia for {y}: {wikipedia_urls}")
-      #    if wikipedia_urls!=[]:
-      #       print(f"NHS for {y}: {nhs_urls}")
-      #    if drugbankid!=[]:
-      #       print(f"DrugBankID for {y}: {drugbankid}")
-      #    else:
-      #       print("Error!")
-      # main_menu()
-      # while True:
-      #    try:
-      #       Option=int(input("Enter Value: "))
-      #       break
-      #    except ValueError:
-      #       print("Error!")
    #Exit
    if Option==8:
       title = pyfiglet.figlet_format('Thank You!', font='Standard')
@@ -969,4 +901,3 @@ while True:
       for i in track(range(3), description="Closing..."):
          time.sleep(1)
       break
-print("my first commit test")
