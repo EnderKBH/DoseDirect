@@ -16,6 +16,6 @@ Step 2: Run DataBase.py to intizialize your database [You have to do this only o
 
 Step 3: Run DoseDirect.py to use program.
 
-# Programmers Note
+# Programmer Note
 This is my first project that i had spent good time on,I want this project to be my first stepping stone 
 to build a functional app that is basically a digital nurse in your home. 
